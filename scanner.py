@@ -1,6 +1,6 @@
 from config import DB_CONFIG, OUTPUT_FILE, CREDIT_CARD_PATTERN
 from db_utils import connect_to_database, fetch_tables_and_columns, fetch_column_data
-from file_utils import initialize_csv, append_to_csv, search_pattern_in_data
+from file_utils import initialize_csv, append_to_csv_with_card_type, search_pattern_in_data
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
             rows = fetch_column_data(cur, table, column)
             matches = search_pattern_in_data(rows, CREDIT_CARD_PATTERN)
             if matches:
-                append_to_csv(OUTPUT_FILE, conn.info.dbname, table, column, matches)
+                append_to_csv_with_card_type(OUTPUT_FILE, conn.info.dbname, table, column, matches)
 
     # Cerrar conexión
     cur.close()

@@ -35,7 +35,8 @@ def main():
         for table, column, data_type in tables_columns:
             if data_type in ['text', 'varchar', 'character varying', 'char', 'integer', 'bigint', 'numeric']:
                 logging.debug(f"Procesando {table}.{column} (tipo {data_type})...")
-                rows = fetch_column_data(cur, table, column)
+                # Agregar comillas dobles al nombre de la columna
+                rows = fetch_column_data(cur, table, f'"{column}"')
                 logging.debug(f"{len(rows)} filas obtenidas de {table}.{column}.")
                 matches = search_pattern_in_data(rows, CREDIT_CARD_PATTERN)
                 if matches:

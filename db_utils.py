@@ -30,7 +30,8 @@ def fetch_tables_and_columns(cursor):
 def fetch_column_data(cursor, table, column):
     """Obtiene todos los datos de una columna específica."""
     try:
-        query = f"SELECT {column} FROM {table} WHERE {column} IS NOT NULL"
+        # Usar LOWER para manejar datos en minúsculas
+        query = f"SELECT LOWER({column}) FROM {table} WHERE {column} IS NOT NULL"
         cursor.execute(query)
         rows = cursor.fetchall()
         logging.debug(f"{len(rows)} filas obtenidas de {table}.{column}.")

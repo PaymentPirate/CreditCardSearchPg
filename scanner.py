@@ -33,8 +33,8 @@ def main():
 
         # Procesar cada tabla y columna
         for table, column, data_type in tables_columns:
-            logging.debug(f"Procesando {table}.{column} (tipo {data_type})...")
-            if data_type in ['text', 'varchar', 'char', 'integer', 'bigint', 'numeric']:
+            if data_type in ['text', 'varchar', 'character varying', 'char', 'integer', 'bigint', 'numeric']:
+                logging.debug(f"Procesando {table}.{column} (tipo {data_type})...")
                 rows = fetch_column_data(cur, table, column)
                 logging.debug(f"{len(rows)} filas obtenidas de {table}.{column}.")
                 matches = search_pattern_in_data(rows, CREDIT_CARD_PATTERN)
